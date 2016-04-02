@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Custom Search</title>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script src="taffy.js"></script>
+    <script src="kDatabase.js"></script>
+    <script>
+        $(document).ready(function () {
+            var s = new Searcher();
+            var res = s.search("kiwi mango");
+            $('#searchBox').keyup(function () {
+                var searchString = $(this).val();
+                $('#sug').html("");
+                if(searchString.length>1)
+                {
+                    var results = s.suggest(searchString);
+                    $('#sug').html("");
+                    for(i=0;i<results.length;i++)
+                    {
+                        $('#sug').html($('#sug').html() + results[i] + "<br>");
+                    }
+                }
+                
+            });
+           
+        });     
+    </script>
+    <style>
+        #sug{
+            font-size : 20pt;
+            box-shadow : 0 0 10px 0 grey;
+            width : 600px;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="text" name="search" id="searchBox"  value="" />
+
+    <div id="sug">
+
+    </div>
+
+</body>
+</html>
